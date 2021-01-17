@@ -1,0 +1,5 @@
+<launch>
+		<node pkg = "conveer_test" type = "conveer_test_node" name = "conveer_node" output = "screen"/>
+		<node name = "conveer_server" pkg = "conveer_test" type = "CmdService.py" output = "screen"/>
+		<node name = "udp2ros_con" pkg = "udp_pkg_test" type = "udp2ros_con.py" output = "screen"/>
+</launch>

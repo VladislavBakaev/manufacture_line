@@ -1,0 +1,8 @@
+[Unit]
+Description=Palletizer manufacture
+
+[Service]
+ExecStart=/etc/systemd/system/manufacture.sh
+
+[Install]
+WantedBy=multi-user.target

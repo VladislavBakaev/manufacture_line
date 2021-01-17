@@ -1,0 +1,8 @@
+[Unit]
+Description=Manufacture
+
+[Service]
+ExecStart=/etc/systemd/system/manufacture.sh
+
+[Install]
+WantedBy=multi-user.target

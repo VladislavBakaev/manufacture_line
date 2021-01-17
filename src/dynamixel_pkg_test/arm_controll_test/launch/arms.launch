@@ -1,0 +1,7 @@
+<launch>
+	<arg name="manip_name"       default="angle"/>
+	<node pkg="arm_controll" type="arm_controll_node" name="arm" output="screen">
+		<param name="manipulator_type" type="string" value="$(arg manip_name)"/>
+		<param name="disable_torque" value="false"/>
+	</node>
+</launch>

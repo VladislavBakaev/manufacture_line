@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import UInt16MultiArray
+from geometry_msgs.msg import Twist
+
+linear_speed = 0.08
+step_angle_speed = 0.1
+pub = rospy.Publisher("/cmd_vel",Twist,queue_size = 10)
+
+def callBack(msg):
+    vel_msg = Twist()
+    vel_msg.linear.x = linear_speed
+    light_bin = []
+    ang_vel = 0
+    msg_data = msg.data
+    for el in msg_data:
+        if(el-250<0):
+            light_bin.append(1)
+        else:
+            light_bin.append(0)
+    print(light_bin)
+    if (light_bin.count(1)>4):
+        vel_msg.linear.x = 0
+        vel_msg.linear.y = 0
+    else:
+
+        for i in range(len(light_bin)):
+            ang_vel +=light_bin[i]*(3-i)*step_angle_speed
+    print (ang_vel)
+    vel_msg.angular.z = ang_vel
+    pub.publish(vel_msg)
+
+if __name__ == "__main__":
+    rospy.init_node('light_node')
+    rospy.Subscriber('/front_light_array',UInt16MultiArray,callBack)
+    rospy.spin()
